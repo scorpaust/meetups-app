@@ -67,6 +67,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
                 _id: selectedMeetup._id.toString(),
                 title: selectedMeetup.title,
                 image: selectedMeetup.image,
+                address: selectedMeetup.address,
                 description: selectedMeetup.description,
             },
         },
