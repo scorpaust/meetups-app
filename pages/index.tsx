@@ -46,20 +46,18 @@ export async function getStaticProps() {
 
     const meetupsCollection = db.collection('meetups')
 
-    const meetupList: WithId<Document>[] = await meetupsCollection
-        .find()
-        .toArray()
+    const meetupList = (await meetupsCollection.find().toArray()) as Meetup[]
 
     client.close()
 
     return {
         props: {
-            meetups: meetupList.map((meetup: WithId<Document>) => ({
+            meetups: meetupList.map((meetup: Meetup) => ({
                 title: meetup.title,
                 address: meetup.address,
                 image: meetup.image,
                 description: meetup.description,
-                id: meetup._id.toString(),
+                _id: meetup._id.toString(),
             })),
         },
     }
