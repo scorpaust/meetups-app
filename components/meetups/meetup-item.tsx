@@ -8,7 +8,7 @@ function MeetupItem(props: Meetup) {
     const router = useRouter()
 
     function showDetailsHandler() {
-        router.push('/encontros/' + props.id)
+        router.push('/encontros/' + props._id)
     }
 
     return (
