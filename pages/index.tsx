@@ -3,7 +3,7 @@ import { Fira_Sans } from 'next/font/google'
 import MeetupList from '@/components/meetups/meetup-list'
 import Layout from '@/components/layout/layout'
 import { useEffect, useState } from 'react'
-import { Meetup, SimpleMeetupProps } from '@/types/meetup'
+import { FunctionMeetupProps, Meetup, SimpleMeetupProps } from '@/types/meetup'
 import { GetServerSidePropsContext } from 'next'
 import { Document, MongoClient, WithId } from 'mongodb'
 
@@ -46,13 +46,19 @@ export async function getStaticProps() {
 
     const meetupsCollection = db.collection('meetups')
 
-    const meetupList = await meetupsCollection.find({})
+    const meetupList = (await meetupsCollection.find({}).toArray()) as Meetup[]
 
     client.close()
 
     return {
         props: {
-            meetups: meetupList,
+            meetups: meetupList.map((meetup: Meetup) => ({
+                title: meetup.title,
+                image: meetup.image,
+                address: meetup.address,
+                description: meetup.description,
+                _id: meetup._id.toString(),
+            })),
         },
     }
 }
