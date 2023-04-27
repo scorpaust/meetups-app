@@ -1,4 +1,4 @@
-import { Meetup, SimpleMeetupProps } from '@/types/meetup'
+import { SimpleMeetupProps } from '@/types/meetup'
 import MeetupItem from './meetup-item'
 import classes from './meetup-list.module.css'
 
